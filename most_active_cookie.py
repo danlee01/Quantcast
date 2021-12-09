@@ -54,17 +54,11 @@ def most_active_cookie(log, target_date):
         target_date, target_time = get_most_recent_timestamp(logs)
         print(f"date: {target_date}, time: {target_time}")
     else:
-
-
-
-
-
-
-
+        print("hi")
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("cookie_log", help="Cookie file to be searched")
-    parser.add_argument("-d", "--date", type=str, help="Date in UTC.")
+    parser.add_argument("cookie_log", help="cookie file to be searched")
+    parser.add_argument("-d", "--date", type=str, help="date in UTC.")
     args = parser.parse_args()
 
     most_active_cookie(args.cookie_log, args.date)
