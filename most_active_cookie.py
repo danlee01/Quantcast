@@ -5,7 +5,6 @@ We define the most active cookie as one seen the most on a given day
 """
 import argparse
 import logging
-import
 
 
 def get_cookie(log):
@@ -38,7 +37,7 @@ def get_most_recent_timestamp(logs, target_date=None):
     """
     if not logs:
         return None, None
-        
+
     try:
         if not target_date:
             date, time = get_timestamp(logs[0])
