@@ -10,4 +10,4 @@ $ python most_active_cookie.py tests/test.csv -d 2018-12-09
 AtY0laUfhglK3lC7
 ```
 ## Testing
-To test, run `python3 -m pytest tests/test_module.py`
+To test, run `python3 -m pytest test_module.py`
