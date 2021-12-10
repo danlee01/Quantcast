@@ -5,15 +5,20 @@ We define the most active cookie as one seen the most on a given day
 """
 import argparse
 import logging
-import pytest
 
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("cookie_log", help="cookie file to be searched")
+    parser.add_argument("-d", "--date", type=str, help="date in UTC.")
+    args = parser.parse_args()
+    return args
 
 def get_cookie(log):
     """Return the cookie of a given log"""
     try:
         cookie, _ = log
     except ValueError:
-        logging.debug(f"Tuple unpacking failed inside get_cookie. log: {log}")
+        logging.debug("Tuple unpacking failed inside get_cookie. log: {}".format(log))
         cookie = None
 
     return cookie
@@ -25,7 +30,7 @@ def get_timestamp(log):
         _, timestamp = log
         date, time = timestamp.strip().split("T")
     except ValueError:
-        logging.debug(f"Tuple unpacking failed inside get_timestamp. log: {log}")
+        logging.debug("Tuple unpacking failed inside get_timestamp. log: {}".format(log))
         date, time = None, None
 
     return date, time
@@ -48,7 +53,7 @@ def get_most_recent_timestamp(logs, target_date=None):
                 if date == target_date:
                     break
     except ValueError:
-        logging.debug(f"Tuple unpacking failed inside get_most_recent_timestamp. log: {log}")
+        logging.debug("Tuple unpacking failed inside get_most_recent_timestamp. log: {}".format(log))
         date, time = None, None
     return date, time
 
@@ -67,7 +72,7 @@ def most_active_cookie(log, target_date=None):
 
     if not target_date:
         target_date, _ = get_most_recent_timestamp(logs)
-        logging.debug(f"User did not provide -d. Default to most recent day: {target_date}")
+        logging.debug("User did not provide -d. Default to most recent day: {}".format(target_date))
 
     cookie_counter = {}
     for log in logs:
@@ -89,10 +94,7 @@ def most_active_cookie(log, target_date=None):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("cookie_log", help="cookie file to be searched")
-    parser.add_argument("-d", "--date", type=str, help="date in UTC.")
-    args = parser.parse_args()
+    args = parse_args()
 
     logging.basicConfig(filename="most_active_cookie.log", \
                         format='%(levelname)s: %(message)s', \
