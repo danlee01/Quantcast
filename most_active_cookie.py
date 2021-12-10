@@ -3,12 +3,16 @@ most_active_cookie is a command line program that prints the most active cookie(
 We define the most active cookie as one seen the most on a given day
 """
 import argparse
+import pytest
 import logging
-             
+
+
 def get_cookie(log):
     """Return the cookie of a given log"""
     cookie, _ = log
     return cookie
+
+
 def get_timestamp(log):
     """Return the timestamp of a given log"""
     if not log:
@@ -19,13 +23,14 @@ def get_timestamp(log):
 
     return date, time
 
+
 def get_most_recent_timestamp(logs, target_date=None):
     """Returns the timestamp of the most recent cookie as for given date.
     Assumes that the logs are sorted by timestamp.
     This will be -1 if there are no cookies.
     """
     if not logs:
-        return -1  # ??
+        return ""
     
     if not target_date:
         date, time = get_timestamp(logs[0])
@@ -37,7 +42,6 @@ def get_most_recent_timestamp(logs, target_date=None):
                 return date, time
     
     return -1
-
 
 
 def most_active_cookie(log, target_date=None):
@@ -69,6 +73,7 @@ def most_active_cookie(log, target_date=None):
 
     for cookie in most_active_cookies:
         print(cookie)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
