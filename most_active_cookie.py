@@ -100,8 +100,4 @@ if __name__ == "__main__":
                         format='%(levelname)s: %(message)s', \
                         filemode='w+', level=logging.DEBUG) 
 
-    logging.basicConfig(filename="most_active_cookie.log", \
-                        format='%(levelname)s: %(message)s', \
-                        filemode='w+', level=logging.DEBUG) 
-
     most_active_cookie(args.cookie_log, args.date)
