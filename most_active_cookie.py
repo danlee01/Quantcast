@@ -83,7 +83,7 @@ def most_active_cookie(log, target_date=None):
                 cookie_counter[cookie] = 0
             cookie_counter[cookie] += 1
 
-    max_occurrances = max(cookie_counter.values())
+    max_occurrances = max(cookie_counter.values(), default=0)
     most_active = []
     for cookie in cookie_counter.keys():
         if cookie_counter[cookie] == max_occurrances:
